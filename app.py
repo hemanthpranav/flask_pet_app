@@ -27,5 +27,13 @@ def add_pet():
         return redirect(url_for('index'))
     return render_template('view_pets.html', form=form)
 
+@app.route('/delete_pet/<int:pet_id>', methods=['POST'])
+def delete_pet(pet_id):
+    pet_to_delete = Pet.query.get_or_404(pet_id)
+    db.session.delete(pet_to_delete)
+    db.session.commit()
+    flash('Pet deleted successfully!', 'success')
+    return redirect(url_for('index'))
+
 if __name__ == '__main__':
     app.run(debug=True)
