@@ -25,6 +25,7 @@
         <nav class="nav">
             <a class="nav-link" href="{{ url_for('index') }}">Home</a>
             <a class="nav-link" href="{{ url_for('add_pet') }}">Add Pet</a>
+            <a href="{{ url_for('add_type') }}">Add Pet Type</a>
         </nav>
         {% with messages = get_flashed_messages(with_categories=True) %}
           {% if messages %}
