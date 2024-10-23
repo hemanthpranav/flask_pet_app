@@ -28,6 +28,20 @@ def add_pet():
     return render_template('view_pets.html', form=form)
 
 @app.route('/delete_pet/<int:pet_id>', methods=['POST'])
+
+def add_type():
+    if request.method == 'POST':
+        type_name = request.form['name']
+
+        new_type = PetType(name=type_name)
+        db.session.add(new_type)
+        db.session.commit()
+
+        flash('Pet type added successfully!')
+        return redirect(url_for('index'))
+
+    return render_template('add_type.html')
+    
 def delete_pet(pet_id):
     pet_to_delete = Pet.query.get_or_404(pet_id)
     db.session.delete(pet_to_delete)
